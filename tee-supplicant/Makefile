@@ -60,6 +60,16 @@ endif
 
 TEES_LDFLAGS	+= -lpthread
 
+# Let builder have a say on TEEC_LOAD_PATH
+ifneq ("$(origin CFG_TEE_CLIENT_LOAD_PATH)","undefined")
+TEES_CFLAGS	+= -DTEEC_LOAD_PATH=\"$(CFG_TEE_CLIENT_LOAD_PATH)\"
+endif
+
+# Let builder have a say on TEEC_EXTRA_LOAD_PATH
+ifneq ("$(origin CFG_TEE_EXTRA_CLIENT_LOAD_PATH)","undefined")
+TEES_CFLAGS	+= -DTEEC_EXTRA_LOAD_PATH=\"$(CFG_TEE_EXTRA_CLIENT_LOAD_PATH)\"
+endif
+
 tee-supplicant: $(TEES_FILE)
 
 $(TEES_FILE): $(TEES_OBJS)

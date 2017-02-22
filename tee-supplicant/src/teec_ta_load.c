@@ -181,6 +181,14 @@ int TEECI_LoadSecureModule(const char* dev_path,
 		return res;
 #endif
 
+#ifdef TEEC_EXTRA_LOAD_PATH
+	int ret;
+	ret = try_load_secure_module(TEEC_EXTRA_LOAD_PATH,
+				     dev_path, destination, ta, ta_size);
+	if (ret != TA_BINARY_NOT_FOUND)
+		return ret;
+#endif
+
 	return try_load_secure_module(TEEC_LOAD_PATH,
 				      dev_path, destination, ta, ta_size);
 }
