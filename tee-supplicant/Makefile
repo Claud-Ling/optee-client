@@ -70,6 +70,11 @@ ifneq ("$(origin CFG_TEE_EXTRA_CLIENT_LOAD_PATH)","undefined")
 TEES_CFLAGS	+= -DTEEC_EXTRA_LOAD_PATH=\"$(CFG_TEE_EXTRA_CLIENT_LOAD_PATH)\"
 endif
 
+# Let builder have a say on TEE_FS_SUBPATH
+ifneq ("$(origin CFG_TEE_FS_SUBPATH)","undefined")
+TEES_CFLAGS	+= -DCFG_TEE_FS_SUBPATH=\"$(CFG_TEE_FS_SUBPATH)\"
+endif
+
 tee-supplicant: $(TEES_FILE)
 
 $(TEES_FILE): $(TEES_OBJS)

@@ -48,8 +48,14 @@
 #include <linux/tee.h>
 
 /* Path to all secure storage files. */
+/* Let builder have a say on TEE_FS_SUBPATH */
+#ifdef CFG_TEE_FS_SUBPATH
+#define TEE_FS_SUBPATH	CFG_TEE_FS_SUBPATH
+#define TEE_FS_PATH 	CFG_TEE_FS_SUBPATH"/tee/"
+#else
 #define TEE_FS_SUBPATH "/data"
 #define TEE_FS_PATH "/data/tee/"
+#endif
 
 #ifndef PATH_MAX
 #define PATH_MAX 255
